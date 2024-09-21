@@ -35,7 +35,7 @@ const Nav = () => {
             <li>Requests</li>
           </Link>
           <li 
-            className='w-[200px] h-10 bg-[#08244d] text-white text-center pt-2 rounded-full cursor-pointer' 
+            className='w-[200px] h-10 bg-[#08244d] text-white text-center pt-2 rounded-full cursor-pointer ' 
             onClick={connectToMetamask}
           >
             Connect MetaMask
@@ -52,7 +52,7 @@ const Nav = () => {
       </div>
 
       <ul
-        className={`md:hidden bg-[orange] flex flex-col items-center gap-5 mt-4 absolute w-full left-0 transition-all duration-300 ease-in-out ${
+        className={`md:hidden bg-[orange] flex flex-col items-center gap-5 mt-1 absolute w-full left-0 transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'top-[80px]' : 'top-[-300px]'
         }`}
       >
@@ -66,7 +66,7 @@ const Nav = () => {
           <li onClick={toggleMenu}>Requests</li>
         </Link>
         <li 
-          className='w-[200px] h-10 bg-[#08244d] text-white text-center pt-2 rounded-full cursor-pointer' 
+          className='w-[200px] h-10 bg-[#08244d] text-white text-center lg:pt-2 pt-1 rounded-full cursor-pointer lg:mb-0 mb-5' 
           onClick={() => { connectToMetamask(); toggleMenu(); }}
         >
           Connect MetaMask
