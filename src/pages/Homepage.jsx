@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Homepage = () => {
   return (
-<div className='w-screen h-screen bg-cover bg-center bg-[#08244d] pt-[15%] pl-[5%]'>
+<div className='w-screen h-screen bg-cover bg-center bg-[#08244d] lg:pt-[15%] pt-[55%] lg:pl-[5%] pl-[10%]'>
         <div className='text-7xl font-extrabold'>
           <span className='text-white'>Zero-KP</span> <span className='text-[orange]'>VERIFY</span>
         </div>
