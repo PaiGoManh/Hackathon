@@ -1,24 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { BrowserProvider } from 'ethers';
+import { FiMenu, FiX } from 'react-icons/fi'; 
 
-const nav = () => {
+const Nav = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
   const provider = new BrowserProvider(window.ethereum);
-  
+
   async function connectToMetamask() {
     const signer = await provider.getSigner();
-    setIsConnected(true);
-    console.log("s",signer.address);
   }
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className='w-screen h-20 bg-[orange] font-bold text-[#08244d] text-xl'>
-      <ul className='flex gap-5 justify-between mx-[4%] pt-5 '>
-        <div className=''>
+      <div className='flex justify-between items-center mx-[4%] h-full'>
+        <div>
           <Link to="/">
-            <li>ZKP</li>
+            <h1 className='text-3xl'>ZKP</h1>
           </Link>
         </div>
-        <div className='flex gap-4 items-center'>
+
+        <ul className='hidden md:flex gap-5 items-center'>
           <Link to="/verifier/">
             <li>Home</li>
           </Link>
@@ -28,11 +34,46 @@ const nav = () => {
           <Link to="/verifier/request">
             <li>Requests</li>
           </Link>
-          <li className='w-[200px] h-10 bg-[#08244d] text-white text-center pt-1 rounded-full' onClick={connectToMetamask}>Connect Metamask</li>
+          <li 
+            className='w-[200px] h-10 bg-[#08244d] text-white text-center pt-2 rounded-full cursor-pointer' 
+            onClick={connectToMetamask}
+          >
+            Connect MetaMask
+          </li>
+        </ul>
+
+        <div className='md:hidden' onClick={toggleMenu}>
+          {isMenuOpen ? (
+            <FiX size={30} className='text-[#08244d]' />
+          ) : (
+            <FiMenu size={30} className='text-[#08244d]' />
+          )}
         </div>
+      </div>
+
+      <ul
+        className={`md:hidden bg-[orange] flex flex-col items-center gap-5 mt-4 absolute w-full left-0 transition-all duration-300 ease-in-out ${
+          isMenuOpen ? 'top-[80px]' : 'top-[-300px]'
+        }`}
+      >
+        <Link to="/verifier/">
+          <li onClick={toggleMenu}>Home</li>
+        </Link>
+        <Link to="/verifier/newrequest">
+          <li onClick={toggleMenu}>New Request</li>
+        </Link>
+        <Link to="/verifier/request">
+          <li onClick={toggleMenu}>Requests</li>
+        </Link>
+        <li 
+          className='w-[200px] h-10 bg-[#08244d] text-white text-center pt-2 rounded-full cursor-pointer' 
+          onClick={() => { connectToMetamask(); toggleMenu(); }}
+        >
+          Connect MetaMask
+        </li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default nav;
+export default Nav;
