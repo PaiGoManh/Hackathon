@@ -40,7 +40,7 @@ export async function verifyOnChain(proof, publicSignals) {
 console.log(signer)
 
     // Replace with your contract's deployed address
-    const contractAddress = "0xcF97CA1dC7F8a0cc47274AaEEf533b23f9280F6A";
+    const contractAddress = "0xBcAA4e33BF33B31fDa10Be3deC3851eef425789e";
 
     const contract = new ethers.Contract(contractAddress, VerifierABI, signer);
 
