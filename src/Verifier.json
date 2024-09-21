@@ -2,9 +2,9 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256[2]",
+				"internalType": "uint256[2][2]",
 				"name": "_pA",
-				"type": "uint256[2]"
+				"type": "uint256[2][2]"
 			},
 			{
 				"internalType": "uint256[2][2]",
@@ -12,9 +12,9 @@
 				"type": "uint256[2][2]"
 			},
 			{
-				"internalType": "uint256[2]",
+				"internalType": "uint256[2][2]",
 				"name": "_pC",
-				"type": "uint256[2]"
+				"type": "uint256[2][2]"
 			},
 			{
 				"internalType": "uint256[1]",
