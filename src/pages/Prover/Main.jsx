@@ -10,8 +10,8 @@ const Prover = () => {
       <Navbar/>
       <div className='w-screen bg-[#08244d] h-[573px] text-white'>
         <Routes>
-          <Route path="/" element={<ProverHome />} />
-          <Route path="/request" element={<Requests />} />
+          <Route path="/" element={< Requests/>} />
+          <Route path="/request" element={< ProverHome/>} />
         </Routes>
       </div>
     </div>

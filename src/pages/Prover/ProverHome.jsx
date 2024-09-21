@@ -4,13 +4,13 @@ const ProverHome = () => {
 
     return (
         <div className='pt-[20%] lg:pt-[5%] lg:ml-[35%] md:ml-[30%] sm:ml-[20%] ml-5 '>
-          <div className='lg:w-[400px] lg:h-[450px] border-[3px] border-[white] rounded-md
+          <div className='lg:w-[400px] lg:h-[400px] border-[3px] border-[white] rounded-md
                           md:w-[400px] md:h-400px]
                           sm:w-[400px] sm:[400px] 
                           w-[340px] h-[350px] '>
             <form className='flex flex-col gap-4 text-black lg:ml-[20%] ml-[15%] mt-[10%]'>
                 <button className='w-[250px] h-10 bg-[#db9410] text-center text-xl font-bold text-white border-white border-[3px] rounded-full'>
-                    Connect  DigiLocker
+                    SCAN QRCODE
                 </button>
                 <div className='mt-[5%]'>
                     <label className="block text-sm font-medium text-white">
@@ -32,7 +32,7 @@ const ProverHome = () => {
                 </button>
 
             </form>
-            <button className='w-[100px] h-10 bg-[orange] rounded-full text-center  mt-8 ml-[38%] md:mb-5'>
+            <button className='w-[100px] h-10 bg-[orange] rounded-full text-center   mt-8 ml-[38%] md:mb-5'>
                 Send
             </button>
           </div>
