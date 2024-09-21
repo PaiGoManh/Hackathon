@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // src/components/ZKSnarkVerification.js
 import React, { useState } from "react";
 import { generateProof, verifyOnChain } from "../zkSnarkFunctions"; // Import functions
@@ -16,6 +17,7 @@ const ZKSnarkVerification = () => {
         
         // Verify proof on-chain
         const isValid = await verifyOnChain(proof, publicSignals);
+        console.log(isValid)
         setVerificationResult(isValid);
     };
 

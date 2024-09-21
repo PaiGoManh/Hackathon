@@ -3,15 +3,15 @@ import * as snarkjs from "snarkjs";
 import { ethers,BrowserProvider } from "ethers";
 import VerifierABI from "./Verifier.json"; // Ensure Verifier.json contains your contract's ABI
 const provider = new BrowserProvider(window.ethereum);
-async function connectToMetamask() {
-  try {
-      const signer = await provider.getSigner();
-      const address = await signer.getAddress(); 
-      console.log("Address", address);
-  } catch (error) {
-      console.error("Failed to connect to Metamask:", error);
-  }
-}
+// async function connectToMetamask() {
+//   try {
+//       const signer = await provider.getSigner();
+//     //   const address = await signer.getAddress(); 
+//       console.log("Address", signer);
+//   } catch (error) {
+//       console.error("Failed to connect to Metamask:", error);
+//   }
+// }
 // Function to generate zk-SNARK proof
 export async function generateProof(age, minAge, maxAge) {
     const input = {
@@ -35,8 +35,9 @@ export async function generateProof(age, minAge, maxAge) {
 
 // Function to verify zk-SNARK proof on-chain
 export async function verifyOnChain(proof, publicSignals) {
-const provider =await connectToMetamask()
-const signer = await provider.getSigner();
+    const signer = await provider.getSigner();
+
+console.log(signer)
 
     // Replace with your contract's deployed address
     const contractAddress = "0xcF97CA1dC7F8a0cc47274AaEEf533b23f9280F6A";
