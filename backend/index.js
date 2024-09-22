@@ -40,13 +40,13 @@ app.post('/post-file', async (req, res) => {
     console.log("Received data:", age);
 
     try {
-        const { proof, publicSignals } = await snarkjs.groth16.fullProve(
+        const { proof } = await snarkjs.groth16.fullProve(
             { age, min_age, max_age },
             './age_range.wasm',
             './age_range_final.zkey'
         );
 
-        const pSignal = ['1']; // Replace with actual public signals if necessary
+        const pSignal = ['1']; 
         console.log("Public Signal:", pSignal);
 
         const vKey = JSON.parse(fs.readFileSync("verification_key.json"));
@@ -57,7 +57,7 @@ app.post('/post-file', async (req, res) => {
             console.log("Verification OK");
             res.status(200).json({
                 success: true,
-                message: 'Proof generated and verified successfully!',
+                message: 'Proof verification successfull!',
             });
         } else {
             console.log("Invalid proof");
