@@ -183,7 +183,6 @@ const ProverHome = () => {
             if (window.ethereum) {
               const provider = new BrowserProvider(window.ethereum);
         
-              // Request account access
               const signer = await provider.getSigner();
               console.log('address',signer.address)
       
