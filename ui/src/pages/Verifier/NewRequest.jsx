@@ -167,7 +167,6 @@ const [contract, setContract] = useState(null);
 const [proverAddress, setProverAddress] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [account, setAccount] = useState(null);
-    const [zkpStatus, setZkpStatus] = useState(false);
 
   const [minAge,setMinage]=useState('');
   const [maxAge,setMaxage]=useState('');
@@ -192,38 +191,16 @@ const [proverAddress, setProverAddress] = useState('');
   
     initBlockchain();
   }, []);
-//   const handleRequestVerification = async () => {
-//     try {
-//       console.log(proverAddress)
-//       const tx = await contract.requestVerification(proverAddress);
-//       const receipt = await tx.wait();
-//       console.log(receipt)
-//       const verificationRequestedEventSignature = ethers.utils.id('VerificationRequested(uint256,address)');
-
-//       const verificationRequestedEvent = receipt.logs.find(log => {
-//         return log.topics[0] === verificationRequestedEventSignature;
-//     });
-
-//     if (verificationRequestedEvent) {
-//         // The data field is in hex format; we need to convert it to a number
-//         const requestId = ethers.BigNumber.from(verificationRequestedEvent.data).toNumber();
-//         setRequestId(requestId);
-//         console.log('Verification request sent:', requestId);
-//     } else {
-//         console.error('VerificationRequested event not found in the receipt');
-//     }
-// } catch (error) {
-//     console.error('Error requesting verification:', error);
-//       console.log('Verification request sent:', requestId);
-//     } 
-  //   };
-  const handleStoreData = async () => {
+  const handleRequestVerification = async () => {
     try {
-      const tx = await contract.storeData(proverAddress, zkpStatus);
-      await tx.wait();
-      console.log('Data stored successfully');
+      console.log(proverAddress)
+      const tx = await contract.requestVerification(proverAddress);
+      const receipt = await tx.wait();
+      const event = receipt.events.find(event => event.event === 'VerificationRequested');
+      const requestId = event.args.requestId.toNumber();
+      console.log('Verification request sent:', requestId);
     } catch (error) {
-      console.error('Error storing data:', error);
+      console.error('Error requesting verification:', error);
     }
   };
   const handleSelectChange = (e) => {
@@ -233,8 +210,7 @@ const [proverAddress, setProverAddress] = useState('');
   };
 const handleSubmit = (e)=>{
   e.preventDefault();
-  setZkpStatus('successfully requested')
-  handleStoreData()
+handleRequestVerification()
 localStorage.setItem('minAge',minAge);
 localStorage.setItem('maxAge',maxAge);
 localStorage.setItem('category',selectedOption);
