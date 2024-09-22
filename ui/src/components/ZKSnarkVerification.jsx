@@ -98,12 +98,14 @@
 import React, { useState } from 'react';
 import {groth16} from 'snarkjs';
 import { BrowserProvider } from 'ethers';
-import verificationKey from './verification_key.json'; 
-// import run from './tst'
+import verificationKey from './verification_key.json';
+
+
 const ZKSnarkVerification = () => {
     const [proof, setProof] = useState(null);
     const [publicSignals, setPublicSignals] = useState(null);
     const [verificationResult, setVerificationResult] = useState('');
+    const [fileContent, setFileContent] = useState('');
 
     const handleProofGeneration = async () => {
         try {
@@ -132,10 +134,29 @@ const ZKSnarkVerification = () => {
         }
     };
 
+    const fetchFileContent = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/read-file'); 
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }else{
+                console.log(response)
+
+            }
+            const data = await response.json();
+            setFileContent(data.content);
+            console.log(fileContent)
+        } catch (error) {
+            console.error('Error fetching file content:', error);
+        }
+    };
+
+
     return (
         <div>
             <h1>zk-SNARK Proof Verification</h1>
             <button onClick={handleProofGeneration}>Generate Proof and Verify</button>
+            <button onClick={fetchFileContent}>Fetch File Content</button>
             {proof && (
                 <div>
                     <h2>Proof</h2>
@@ -152,6 +173,12 @@ const ZKSnarkVerification = () => {
                 <div>
                     <h2>Verification Result</h2>
                     <p>{verificationResult}</p>
+                </div>
+            )}
+            {fileContent && (
+                <div>
+                    <h2>File Content</h2>
+                    <pre>{fileContent}</pre>
                 </div>
             )}
         </div>

@@ -1,7 +1,7 @@
 import { groth16 } from "snarkjs";
-import { readFileSync } from "fs";
+//import { readFileSync } from "fs";
 
-async function run() {
+export async function run() {
     const { proof ,publicSignals} = await groth16.fullProve({age:9, min_age:8, max_age:9},
         './age_range.wasm',
         './age_range_final.zkey');
@@ -20,9 +20,8 @@ console.log(res)
     } else {
         console.log("Invalid proof");
     }
+    return res
 
 }
 
-run().then(() => {
-    process.exit(0);
-});
+export default run;
