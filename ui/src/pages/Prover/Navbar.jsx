@@ -16,7 +16,7 @@ const nav = () => {
             <li>Home</li>
           </Link>
           <Link to="/prover/request">
-            <li>History</li>
+            <li>Add Proof</li>
           </Link>
         </div>
       </ul>

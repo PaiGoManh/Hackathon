@@ -95,9 +95,9 @@
 
 // export default ZKSnarkVerification;
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {groth16} from 'snarkjs';
-import { BrowserProvider } from 'ethers';
+// import { BrowserProvider } from 'ethers';
 import verificationKey from './verification_key.json';
 
 

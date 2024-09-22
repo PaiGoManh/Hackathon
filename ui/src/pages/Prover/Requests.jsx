@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { MdOutlineContentPasteGo } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const data = [
-  { ID: '001', Condition: 'age', Status: 'Active' },
-  { ID: '002', Condition: 'age', Status: 'Inactive' },
+  { ID: '001', Condition: 'age', Status: 'Verified' },
+  { ID: '002', Condition: 'age', Status: 'Not verified' },
 
 ];
 
@@ -12,8 +13,13 @@ const Requests = () => {
 
   return (
     <div className='pt-[5%]'>
+      <button className='w-[250px] h-10 bg-[blue] text-center text-xl font-bold text-white border-white border-[3px] rounded-full
+        ml-16 mt-5'>
+          scan qrcode
+        </button>
         <div className='text-center lg:mt-0 mt-[10%] text-2xl font-bold '>REQUESTS PENDING</div>
-        <div>
+
+      <div>
         <table className="lg:min-w-[500px] min-w-[360px] lg:ml-[30%] ml-2  table-auto bg-white rounded-lg shadow-lg lg:mt-0 mt-[5%]">
             <thead>
                 <tr className="bg-gray-200 text-gray-600 text-left">
@@ -30,9 +36,11 @@ const Requests = () => {
                 <td className="px-4 py-2 text-center">{item.Condition}</td>
                 <td className="px-4 py-2 text-center">{item.Status}</td>
                 <td className="px-4 py-2 text-center">
-                  <a href={item.View} className="text-blue-500 hover:underline">
-                    <MdOutlineContentPasteGo/>
-                  </a>
+                  <div href={item.View} className="text-blue-500 hover:underline">
+                    <Link to='/prover/request'>
+                      <MdOutlineContentPasteGo/>
+                    </Link>
+                  </div>
                 </td>
               </tr>
               ))}
