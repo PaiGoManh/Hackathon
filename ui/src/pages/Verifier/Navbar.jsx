@@ -35,12 +35,12 @@ const Nav = () => {
           <Link to="/verifier/request">
             <li>Requests</li>
           </Link>
-          <li 
+          {/* <li 
             className='w-[200px] h-10 bg-[#08244d] text-white text-center pt-2 rounded-full cursor-pointer ' 
             onClick={connectToMetamask}
           >
             Connect MetaMask
-          </li>
+          </li> */}
         </ul>
 
         <div className='md:hidden' onClick={toggleMenu}>
