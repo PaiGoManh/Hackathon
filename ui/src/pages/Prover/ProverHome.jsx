@@ -1,7 +1,11 @@
 import { useState,useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 import { BrowserProvider,Contract } from 'ethers';
+import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+
+
+
 const contractABI = 
   [
     {
@@ -167,6 +171,12 @@ const ProverHome = () => {
     const [account, setAccount] = useState(null);
     const [requestId, setRequestId] = useState('');
     const [zkpStatus, setZkpStatus] = useState(false);
+    const [message, setMessage] = useState({ type: '', content: '' });
+    const [isConnected, setIsConnected] = useState(localStorage.getItem('digilockerConnected') === 'true');
+    const [isConnecting, setIsConnecting] = useState(false);
+
+
+
   
     useEffect(() => {
         const initBlockchain = async () => {
@@ -198,6 +208,7 @@ const ProverHome = () => {
           console.error('Error completing verification:', error);
         }
       };
+      
     const handleSubmit = async (e) => {
         e.preventDefault();
         handleCompleteVerification()
@@ -217,12 +228,24 @@ const ProverHome = () => {
 
         if (response.ok) {
             setZkpStatus('success')
-            toast.success(result.message); 
+            setMessage({ type: 'success', content: result.message });
         } else {
             setZkpStatus('failed')
-            toast.error(result.message); 
+            setMessage({ type: 'error', content: result.message }); 
         }
     };
+
+    const handleDigiLockerConnect = () => {
+        if (!isConnected) {
+            setIsConnecting(true);
+            setTimeout(() => {
+                localStorage.setItem('digilockerConnected', 'true');
+                setIsConnected(true);
+                setIsConnecting(false);
+            }, 3000);
+        }
+    };
+ 
 
     return (
         <div className='pt-[10%] lg:pt-[5%] lg:ml-[35%] md:ml-[30%] sm:ml-[20%] ml-5'>
@@ -231,12 +254,21 @@ const ProverHome = () => {
             <p>Connected Account: {account}</p>
 
                 <form className='flex flex-col gap-4 text-black lg:ml-[20%] ml-[15%] mt-[10%]' onSubmit={handleSubmit}>
-                    <button
-                        type="button" 
-                        className='w-[250px] h-10 bg-[#db9410] text-center text-xl font-bold text-white border-white border-[3px] rounded-full'
-                    >
-                        Connect DigiLocker
-                    </button>
+                <button
+                       type="button"
+                       className={`w-[250px] h-10 text-center text-xl font-bold text-white border-white border-[3px] rounded-full ${
+                           isConnected
+                               ? 'bg-green-500'
+                               : isConnecting
+                               ? 'bg-blue-400'
+                               : 'bg-[#db9410]'
+                       }`}
+                       onClick={handleDigiLockerConnect}
+                       disabled={isConnected || isConnecting}
+                   >
+                       {isConnecting ? 'Connecting...' : isConnected ? 'Connected' : 'Connect DigiLocker'}
+                   </button>
+
                     <div className='mt-[5%]'>
                         <label className="block text-sm font-medium text-white">Enter Request ID</label>
                         <input
@@ -262,6 +294,21 @@ const ProverHome = () => {
                     <button type="submit" className='w-[250px] bg-[orange] h-10 text-center rounded-lg text-white font-semibold'>
                         Generate proof & Send
                     </button>
+                    {message.content && (
+                   <div
+                       className={`mt-8 pl-3 ml-[46px] w-[255px] lg:ml-[20%] ${
+                           message.type === 'success' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
+                       } flex items-center`}
+                   >
+                       {message.type === 'success' ? (
+                           <FaCheckCircle className="mr-2 text-green-600" />
+                       ) : (
+                           <FaExclamationCircle className="mr-2 text-red-600" />
+                       )}
+                       <span>{message.content}</span>
+                   </div>
+               )}
+
                 </form>
             </div>
         </div>
