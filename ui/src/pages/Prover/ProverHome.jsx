@@ -296,7 +296,7 @@ const ProverHome = () => {
                     </button>
                     {message.content && (
                    <div
-                       className={`mt-8 pl-3 ml-[46px] w-[255px] lg:ml-[20%] ${
+                       className={`mt-5 pl-3  w-[255px] lg:ml-[20%] ${
                            message.type === 'success' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
                        } flex items-center`}
                    >
