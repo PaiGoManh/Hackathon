@@ -40,12 +40,16 @@ export async function verifyOnChain(proof, publicSignals) {
 console.log(signer)
 
     // Replace with your contract's deployed address
-    const contractAddress = "0xBcAA4e33BF33B31fDa10Be3deC3851eef425789e";
+    const contractAddress = "0x489BA9CFD25B286391dff699408511681aF60e95";
 
     const contract = new ethers.Contract(contractAddress, VerifierABI, signer);
 
-    const { a, b, c } = proof;
-    const inputs = publicSignals;
+
+    // Proof structure for the Groth16 verifier contract
+    const a = [proof.pi_a[0], proof.pi_a[1]]; // Length 2
+    const b = [[proof.pi_b[0][0], proof.pi_b[0][1]], [proof.pi_b[1][0], proof.pi_b[1][1]]]; // 2x2 array
+    const c = [proof.pi_c[0], proof.pi_c[1]]; // Length 2
+    const inputs = publicSignals;  
 
     try {
         const isValid = await contract.verifyProof(a, b, c, inputs);
