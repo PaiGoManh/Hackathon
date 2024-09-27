@@ -201,9 +201,9 @@ localStorage.setItem('category',selectedOption);
 }
   return (
     <div className='lg:pt-[4%] pt-[10%] lg:ml-[35%] md:ml-[30%] sm:ml-[20%] ml-3'>
-      <div className='lg:w-[400px] lg:h-[470px] border-[3px]
+      <div className='lg:w-[400px] lg:h-[495px] border-[3px]
                        md:w-[400px] md:h-[450px]
-                       w-[350px] h-[470px] border-[white]'>
+                       w-[350px] h-[475px] border-[white]'>
  <p>Connected Account: {account}</p>
 
         <div className='text-center mt-5 text-2xl font-bold'>Request Form</div>

@@ -14,7 +14,7 @@ const Requests = () => {
   return (
     <div className='pt-[5%]'>
       <button className='w-[250px] h-10 bg-[blue] text-center text-xl font-bold text-white border-white border-[3px] rounded-full
-        ml-16 mt-5'>
+        ml-[40%] mt-5 mb-[5%]'>
           scan qrcode
         </button>
         <div className='text-center lg:mt-0 mt-[10%] text-2xl font-bold '>REQUESTS PENDING</div>

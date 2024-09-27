@@ -47,7 +47,7 @@ app.post('/post-file', async (req, res) => {
         );
 
         const pSignal = ['1']; 
-        console.log("Public Signal:", pSignal);
+        console.log("Public Signal:", proof);
 
         const vKey = JSON.parse(fs.readFileSync("verification_key.json"));
         const result = await snarkjs.groth16.verify(vKey, pSignal, proof);

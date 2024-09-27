@@ -10,7 +10,7 @@ const Verifier = () => {
   return (
     <div>
       <Navbar/>
-      <div className='w-screen bg-[#08244d] h-[573px] text-white'>
+      <div className='w-screen bg-[#08244d] h-[798px] text-white'>
         <Routes>
           <Route path="/" element={<VerifierHome />} />
           <Route path="/newrequest" element={<NewRequest />} />

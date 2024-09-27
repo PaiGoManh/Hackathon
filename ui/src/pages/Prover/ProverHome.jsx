@@ -159,6 +159,29 @@ const ProverHome = () => {
         try {
             const tx = await contract.storeData(proverAddress, zkpStatus);
             await tx.wait();
+            if (tx) {
+                const maxAge = localStorage.getItem('maxAge');
+                const minAge = localStorage.getItem('minAge');
+                const data = { inputValue, maxAge, minAge };
+        
+                const response = await fetch('http://localhost:3000/post-file', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+        
+                const result = await response.json();
+        
+                if (response.ok) {
+                    setZkpStatus('success')
+                    setMessage({ type: 'success', content: result.message });
+                } else {
+                    setZkpStatus('failed')
+                    setMessage({ type: 'error', content: result.message }); 
+                }
+            }
             console.log('Data stored successfully');
           } catch (error) {
             console.error('Error storing data:', error);
@@ -167,27 +190,6 @@ const ProverHome = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         handleCompleteVerification()
-        const maxAge = localStorage.getItem('maxAge');
-        const minAge = localStorage.getItem('minAge');
-        const data = { inputValue, maxAge, minAge };
-
-        const response = await fetch('http://localhost:3000/post-file', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            setZkpStatus('success')
-            setMessage({ type: 'success', content: result.message });
-        } else {
-            setZkpStatus('failed')
-            setMessage({ type: 'error', content: result.message }); 
-        }
     };
 
     const handleDigiLockerConnect = () => {
@@ -206,7 +208,12 @@ const ProverHome = () => {
         <div className='pt-[10%] lg:pt-[5%] lg:ml-[35%] md:ml-[30%] sm:ml-[20%] ml-5'>
             <ToastContainer /> 
             <div className='lg:w-[400px] lg:h-[400px] border-[3px] border-[white] rounded-md w-[340px] h-[470px]'>
-            <p>Connected Account: {account}</p>
+                <div className='flex items-center gap-[5%] justify-center w-[300px] mt-3 ml-[12%] rounded-full bg-white text-black '>
+                    <div>
+                        <p>Connected Account:</p>
+                    </div>
+                    <div>{account ? `${account.slice(0, 8)}...${account.slice(-4)}` : ''}</div>
+                </div>
 
                 <form className='flex flex-col gap-4 text-black lg:ml-[20%] ml-[15%] mt-[10%]' onSubmit={handleSubmit}>
                 <button
@@ -226,7 +233,7 @@ const ProverHome = () => {
 
 
                     <div className='mt-[5%]'>
-                        <label className="block text-sm font-medium text-white">Enter type</label>
+                        <label className="block text-sm font-medium text-white">Enter proof</label>
                         <input
                             id="textInput"
                             type="text"
@@ -237,11 +244,11 @@ const ProverHome = () => {
                         />
                     </div>
                     <button type="submit" className='w-[250px] bg-[orange] h-10 text-center rounded-lg text-white font-semibold'>
-                        Generate proof & Send
+                        Generate Proof & Send
                     </button>
                     {message.content && (
                    <div
-                       className={`mt-5 pl-3  w-[255px] lg:ml-[20%] ${
+                       className={`mt-5 px-2  w-[255px] rounded-full  ${
                            message.type === 'success' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
                        } flex items-center`}
                    >

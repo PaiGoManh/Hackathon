@@ -9,7 +9,7 @@ const Prover = () => {
   return (
     <div>
       <Navbar/>
-      <div className='w-screen bg-[#08244d] h-[573px] text-white'>
+      <div className='w-screen bg-[#08244d] h-[798px]  text-white'>
         <Routes>
           <Route path="/" element={< Requests/>} />
           <Route path="/request" element={< ProverHome/>} />
